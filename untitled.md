@@ -7,14 +7,18 @@ This project builds an ETL pipeline that extracts data from S3, processes them u
 ### Prerequisites
 
 #### Datasets
+
 S3 links for datasets access:
 
 Song data: *s3://udacity-dend/song_data*
+
 Log data: *s3://udacity-dend/log_data*
+
 
 For song dataset, each file is in JSON format and contains metadata about song and the artist of that song. These files partitioned by the firs thee letters of each song's track ID. Here are examples of filepaths to two files in this dataset:
 
     *song_data/A/B/C/TRABCEI128F424C983.json*
+    
     *song_data/A/A/B/TRAABJL12903CDCF1A.json*
 
 And how the single song file look like in JSON format:
@@ -53,7 +57,8 @@ Create a combined cluster Notebooks to run Spark on EMR cluster.
 
 ### Requirements for Song Play Analysis
 Using the song and log datasets, need to create a star schema optimized for queries on song play analysis. The schema like this.
-![alt text]https://github.com/doanvanthanhfpt/Project4-DataLake/blob/main/Sparkify_DataAnalysis-DB_schema_small.png
+
+    ![alt text]https://github.com/doanvanthanhfpt/Project4-DataLake/blob/main/Sparkify_DataAnalysis-DB_schema_small.png
 
 #### Fact Table
 1. **songplays** - records in log data associated with song plays i.e. records with page **NextSong**.
@@ -61,15 +66,19 @@ Using the song and log datasets, need to create a star schema optimized for quer
 
 #### Dimension Tables
 2. **users** - users in the app.
+
     *user_id, first_name, last_name, gender, level*
     
 3. **songs** - songs in music database.
+
     *song_id, title, artist_id, year, duration*
     
 4. **artists** - artists in music database.
+
     *artist_id, name, location, lattitude, longitude*
     
 5. **time** - timestamps of records in songplays broken down into specific units.
+
     *start_time, hour, day, week, month, year, weekday*
     
 #### Implement Processes
