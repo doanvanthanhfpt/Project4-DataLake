@@ -97,9 +97,9 @@ Verify time_table vs parquet file.
 Note: can do the same verification with another tables.
 
 Count amount of fact table record:
-    *songplays_count* = *spark.sql*(""" \
-                                **SELECT** COUNT(*) \
-                                **FROM** songplays_table\
+    *songplays_count* = *spark.sql*(""" 
+                                **SELECT** COUNT(*) 
+                                **FROM** songplays_table
                                 """)
     *print(songplays_count)*
 
