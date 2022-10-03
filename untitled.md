@@ -29,7 +29,7 @@ For log data set, a kind of JSON format too. This dataset contains log files tha
 
 And then, the detail screenshot of a single JSON log data file
 
-    <log_data-2018-11-12-events.png>
+    ![alt text]https://github.com/doanvanthanhfpt/Project4-DataLake/blob/main/log_data-2018-11-12-events.png
 
 #### Software and Hardware Configuration
 The software environent to handle these dataset created on AWS EMR Cluster (Elastic Map Reduced Cluster). It's a AWS cloud base analysis platform with configurations:
@@ -53,7 +53,7 @@ Create a combined cluster Notebooks to run Spark on EMR cluster.
 
 ### Requirements for Song Play Analysis
 Using the song and log datasets, need to create a star schema optimized for queries on song play analysis. The schema like this.
-    <Sparkify_DataAnalysis-DB_schema_small.png>
+![alt text]https://github.com/doanvanthanhfpt/Project4-DataLake/blob/main/Sparkify_DataAnalysis-DB_schema_small.png
 
 #### Fact Table
 1. **songplays** - records in log data associated with song plays i.e. records with page **NextSong**.
