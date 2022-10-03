@@ -85,7 +85,7 @@ Note: Seperate functions for test included process_log_data.ipynb and process_so
 
 Initialize a Terminal from Notebook and then run:
 
-    $ **python etl.py*
+    $ *python etl.py*
 
 ### Examples verify queries (run bellows on Notebook)
 Verify time_table vs parquet file. 
@@ -97,9 +97,9 @@ Verify time_table vs parquet file.
 Note: can do the same verification with another tables.
 
 Count amount of fact table record:
-    *songplays_count* = *spark.sql*("""
-                                **SELECT** COUNT(*) 
-                                **FROM** songplays_table
+    *songplays_count* = *spark.sql*(""" \
+                                **SELECT** COUNT(*) \
+                                **FROM** songplays_table\
                                 """)
     *print(songplays_count)*
 
