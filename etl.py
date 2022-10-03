@@ -21,9 +21,8 @@ def create_spark_session():
 
 
 def process_song_data(spark, input_data, output_data):
-    # get filepath to song data file - this path for test only
     song_data = input_data + "song_data/*/*/*/*.json"
-        
+    
     # read song data file
     df = spark.read.json(song_data)
         
@@ -49,9 +48,8 @@ def process_song_data(spark, input_data, output_data):
 
 
 def process_log_data(spark, input_data, output_data):
-    # get filepath to log data file
     log_data = input_data + "log_data/*/*/*.json"
-        
+    
     # read log data file
     df = spark.read.json(log_data)
     
@@ -95,10 +93,9 @@ def process_log_data(spark, input_data, output_data):
     #songplays_log = spark.read.json(log_data) # get full log of songplay
     df = df.withColumn('songplay_id', F.monotonically_increasing_id())
     df.createOrReplaceTempView("log_data_table")
-    #song_df.printSchema()
     df.sort("song").show(truncate=False) # Verify log_data_table
     
-    song_data = input_data +"songdata/*/*/*/*.json" # for local test only
+    song_data = input_data +"song_data/*/*/*/*.json"
     song_df = spark.read.json(song_data)
     song_df.createOrReplaceTempView("song_data_table") # get filtered of songplay with page='NextSong'
     song_df.printSchema()
@@ -111,6 +108,7 @@ def process_log_data(spark, input_data, output_data):
     """    
     songplays_table = spark.sql("""
     SELECT
+        ldt.songplay_id as songplay_id,
         ldt.ts as start_time,
         ldt.userId AS user_id,
         ldt.level as level,
@@ -120,32 +118,25 @@ def process_log_data(spark, input_data, output_data):
         ldt.location as location,
         ldt.userAgent as user_agent,
         year(ldt.timestamp) as year,
-        month(ldt.timestamp) as month,
-        ldt.songplay_id as songplay_id
+        month(ldt.timestamp) as month
     FROM log_data_table ldt
     JOIN song_data_table sdt 
     ON ldt.song = sdt.title AND ldt.artist = sdt.artist_name
     """)
-
+        
     # write songplays table to parquet files partitioned by year and month
     # songplays_table.write.partitionBy("year", "month").parquet(os.path.join(output_data, "songplays/songplays.parquet"), "overwrite")
     songplays_table.write.mode("overwrite").parquet(os.path.join(output_data, 'songplays'), partitionBy=['year', 'month'])
     
     # Verify songplays_table parquet file
-    print("This is songplays_table:")
+    print("Verify songplays_table:")
     songplays_table.printSchema()
     songplays_table.sort("start_time").show(truncate=False)
-
-    # print("This is songplays_parquet:")
-    # songplays_parquet = spark.read.parquet(output_data + "songplays")
-    # songplays_parquet = spark.read.parquet("./output/songplays/songplays.parquet")
-    # songplays_parquet.printSchema()
-    # songplays_parquet.sort("start_time").show(truncate=False)
 
 
 def main():
     spark = create_spark_session()
-    ## Define in/out data for cloud version
+    ## Define in/out data for submit cloud version
     input_data = "s3a://udacity-dend/"
     output_data = "s3://thanhdv-spark-datalake-emr-project4-03/emr-lab-data/"
     
