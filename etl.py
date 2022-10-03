@@ -22,9 +22,8 @@ def create_spark_session():
 
 def process_song_data(spark, input_data, output_data):
     # get filepath to song data file - this path for test only
-    # song_data = input_data + "song_data/*/*/*/*.json" # for cloud submit version
-    song_data = input_data +"songdata/*/*/*/*.json" # for local test only
-    
+    song_data = input_data + "song_data/*/*/*/*.json"
+        
     # read song data file
     df = spark.read.json(song_data)
         
@@ -51,9 +50,8 @@ def process_song_data(spark, input_data, output_data):
 
 def process_log_data(spark, input_data, output_data):
     # get filepath to log data file
-    # log_data = input_data + "log_data/*.json" # for cloud submit version
-    log_data = input_data + "logdata/*.json" # for submit version
-    
+    log_data = input_data + "log_data/*/*/*.json"
+        
     # read log data file
     df = spark.read.json(log_data)
     
@@ -148,12 +146,12 @@ def process_log_data(spark, input_data, output_data):
 def main():
     spark = create_spark_session()
     ## Define in/out data for cloud version
-    # input_data = "s3a://udacity-dend/"
-    # output_data = "s3://thanhdv-spark-datalake-emr-project4-03/emr-lab-data/"
+    input_data = "s3a://udacity-dend/"
+    output_data = "s3://thanhdv-spark-datalake-emr-project4-03/emr-lab-data/"
     
     ## Define in/out data for local test version
-    input_data = "./input/"
-    output_data = "./output/"
+    # input_data = "./input/"
+    # output_data = "./output/"
     
     process_song_data(spark, input_data, output_data)    
     process_log_data(spark, input_data, output_data)
