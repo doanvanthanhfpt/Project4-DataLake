@@ -36,6 +36,7 @@ And then, the detail screenshot of a single JSON log data file
     ![alt text]https://github.com/doanvanthanhfpt/Project4-DataLake/blob/main/log_data-2018-11-12-events.png
 
 #### Software and Hardware Configuration
+
 The software environent to handle these dataset created on AWS EMR Cluster (Elastic Map Reduced Cluster). It's a AWS cloud base analysis platform with configurations:
 
     Release: *emr-5.20.0* or later.
@@ -62,6 +63,7 @@ Using the song and log datasets, need to create a star schema optimized for quer
 
 #### Fact Table
 1. **songplays** - records in log data associated with song plays i.e. records with page **NextSong**.
+
     *songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent*
 
 #### Dimension Tables
